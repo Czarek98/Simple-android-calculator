@@ -1,39 +1,34 @@
 package com.example.calculator;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.gridlayout.widget.GridLayout;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     Activity activity;
     GridLayout gridLayout;
     TextView resultTextView;
-    EditText editTextNumber;
     Button one, two, three, four, five, six, seven, eight, nine, zero;
-    Button plus, minus, divide, multiply, equals, dot, clear, leftBracket, rightBracket, delete;
+    Button plus, minus, divide, multiply, equals, dot, clear, leftBracket, power, delete;
     Switch darkMode;
+    String result = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         activity = this;
-        Button defbtn=new Button(this);
         darkMode = findViewById(R.id.darkMode);
         darkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked){
@@ -68,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 divide.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
                 multiply.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
                 leftBracket.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
-                rightBracket.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
+                power.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
                 clear.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
                 delete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF000000")));
 
@@ -94,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 divide.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F1DD2F")));
                 multiply.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF03DAC5")));
                 leftBracket.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF4444")));
-                rightBracket.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFFF4444")));
+                power.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF00DDFF")));
                 clear.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFCC0000")));
                 delete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFCC0000")));
 
@@ -102,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         gridLayout = findViewById(R.id.gridLayout);
-        resultTextView = findViewById(R.id.editTextNumberSigned);
+        resultTextView = findViewById(R.id.resultTextView);
+        resultTextView.setText("");
         //numbers
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
@@ -123,52 +118,68 @@ public class MainActivity extends AppCompatActivity {
         dot = findViewById(R.id.dot);
         clear = findViewById(R.id.clear);
         leftBracket = findViewById(R.id.leftBracket);
-        rightBracket = findViewById(R.id.rightBracket);
+        power = findViewById(R.id.power);
         delete = findViewById(R.id.delete);
 
 
 
     }
+    public void addToResult(String sign){
+        result = result + sign;
+        resultTextView.setText(result);
+    }
+
+    boolean b;
 
 
     public void inputClick(View view) {
         if (view.getId()== R.id.one){
-            resultTextView.append("1");
+            addToResult("1");
         }
         else if(view.getId() == R.id.two){
-            resultTextView.append("2");
+            addToResult("2");
         }else if(view.getId() == R.id.three){
-            resultTextView.append("3");
+            addToResult("3");
         }else if(view.getId() == R.id.plus){
-            resultTextView.append("+");
+            addToResult("+");
         }else if(view.getId() == R.id.four){
-            resultTextView.append("4");
+            addToResult("4");
         }else if(view.getId() == R.id.five){
-            resultTextView.append("5");
+            addToResult("5");
         }else if(view.getId() == R.id.six){
-            resultTextView.append("6");
+            addToResult("6");
         }else if(view.getId() == R.id.minus){
-            resultTextView.append("-");
+            addToResult("-");
         }else if(view.getId() == R.id.seven){
-            resultTextView.append("7");
+            addToResult("7");
         }else if(view.getId() == R.id.eight){
-            resultTextView.append("8");
+            addToResult("8");
         }else if(view.getId() == R.id.nine){
-            resultTextView.append("9");
+            addToResult("9");
         }else if(view.getId() == R.id.multiplication){
-            resultTextView.append("*");
+            addToResult("*");
         }else if(view.getId() == R.id.dot){
-            resultTextView.append(".");
+            addToResult(".");
         }else if(view.getId() == R.id.zero){
-            resultTextView.append("0");
+            addToResult("0");
         }else if(view.getId() == R.id.clear){
             resultTextView.setText("");
+            result = "";
         }else if(view.getId() == R.id.division){
-            resultTextView.append("/");
+            addToResult("/");
         }else if(view.getId() == R.id.leftBracket){
-            resultTextView.append("(");
-        }else if(view.getId() == R.id.rightBracket){
-            resultTextView.append(")");
+
+                if (b == true){
+                    addToResult(")");
+                    b = false;
+                }
+                else{
+                    addToResult("(");
+                    b = true;
+                }
+
+        }else if(view.getId() == R.id.power){
+            addToResult("^");
         }else if(view.getId() == R.id.delete){
             if (resultTextView.length()<1){
                 Context context = getApplicationContext();
@@ -180,15 +191,11 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
             else {
-                CharSequence text = resultTextView.getText();
-                text = text.subSequence(0, text.length() - 1);
-                resultTextView.setText(text);
+                result = result.substring(0,resultTextView.length()-1);
+                resultTextView.setText(result);
             }
 
         }else if(view.getId() == R.id.equals){
-
-
-
 
         }
     }

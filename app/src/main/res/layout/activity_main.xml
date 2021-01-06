@@ -11,14 +11,14 @@
         android:layout_width="381dp"
         android:layout_height="423dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="62dp"
         android:layout_marginEnd="20dp"
         android:visibility="visible"
         app:columnCount="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberSigned"
+        app:layout_constraintTop_toBottomOf="@+id/resultTextView"
         app:rowCount="5"
         app:useDefaultMargins="true"
         tools:ignore="MissingConstraints"
@@ -184,17 +184,17 @@
             android:backgroundTint="@android:color/holo_red_light"
             android:onClick="inputClick"
             android:tag="16"
-            android:text="("
+            android:text="()"
             android:textSize="40sp" />
 
         <Button
-            android:id="@+id/rightBracket"
+            android:id="@+id/power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_red_light"
+            android:backgroundTint="@android:color/holo_blue_bright"
             android:onClick="inputClick"
             android:tag="17"
-            android:text=")"
+            android:text="^"
             android:textSize="40sp" />
 
         <Button
@@ -227,20 +227,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextNumberSigned"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:ems="10"
-        android:inputType="numberDecimal|numberSigned"
-        android:textSize="40sp"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="409dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="36dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/darkMode" />
 
