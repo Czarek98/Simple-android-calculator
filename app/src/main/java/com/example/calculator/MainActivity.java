@@ -18,7 +18,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button one, two, three, four, five, six, seven, eight, nine, zero;
     Button plus, minus, divide, multiply, equals, dot, clear, leftBracket, power, delete;
     Switch darkMode;
-    String result = "";
+    String input = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         gridLayout = findViewById(R.id.gridLayout);
         resultTextView = findViewById(R.id.resultTextView);
-        resultTextView.setText("");
         //numbers
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
@@ -125,63 +127,78 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void addToResult(String sign){
-        result = result + sign;
-        resultTextView.setText(result);
+        input = input + sign;
+        resultTextView.setText(input);
     }
 
     boolean b;
 
+    public void equalsClick(View view){
+        Double score = null;
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
+
+        try {
+            score = (double)engine.eval(input);
+        } catch (ScriptException e) {
+            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+        }
+
+        if (score != null){
+            resultTextView.setText(String.valueOf(score.doubleValue()));
+        }
+
+
+    }
 
     public void inputClick(View view) {
-        if (view.getId()== R.id.one){
+        if (view.getId() == R.id.one) {
             addToResult("1");
-        }
-        else if(view.getId() == R.id.two){
+        } else if (view.getId() == R.id.two) {
             addToResult("2");
-        }else if(view.getId() == R.id.three){
+        } else if (view.getId() == R.id.three) {
             addToResult("3");
-        }else if(view.getId() == R.id.plus){
+        } else if (view.getId() == R.id.plus) {
             addToResult("+");
-        }else if(view.getId() == R.id.four){
+        } else if (view.getId() == R.id.four) {
             addToResult("4");
-        }else if(view.getId() == R.id.five){
+        } else if (view.getId() == R.id.five) {
             addToResult("5");
-        }else if(view.getId() == R.id.six){
+        } else if (view.getId() == R.id.six) {
             addToResult("6");
-        }else if(view.getId() == R.id.minus){
+        } else if (view.getId() == R.id.minus) {
             addToResult("-");
-        }else if(view.getId() == R.id.seven){
+        } else if (view.getId() == R.id.seven) {
             addToResult("7");
-        }else if(view.getId() == R.id.eight){
+        } else if (view.getId() == R.id.eight) {
             addToResult("8");
-        }else if(view.getId() == R.id.nine){
+        } else if (view.getId() == R.id.nine) {
             addToResult("9");
-        }else if(view.getId() == R.id.multiplication){
+        } else if (view.getId() == R.id.multiplication) {
             addToResult("*");
-        }else if(view.getId() == R.id.dot){
+        } else if (view.getId() == R.id.dot) {
             addToResult(".");
-        }else if(view.getId() == R.id.zero){
+        } else if (view.getId() == R.id.zero) {
             addToResult("0");
-        }else if(view.getId() == R.id.clear){
+        } else if (view.getId() == R.id.clear) {
             resultTextView.setText("");
-            result = "";
-        }else if(view.getId() == R.id.division){
+            input = "";
+            b = false;
+        } else if (view.getId() == R.id.division) {
             addToResult("/");
-        }else if(view.getId() == R.id.leftBracket){
+        } else if (view.getId() == R.id.leftBracket) {
 
-                if (b == true){
-                    addToResult(")");
-                    b = false;
-                }
-                else{
-                    addToResult("(");
-                    b = true;
-                }
+            if (b == true) {
+                addToResult(")");
+                b = false;
+            } else {
+                addToResult("(");
+                b = true;
+            }
 
-        }else if(view.getId() == R.id.power){
+        } else if (view.getId() == R.id.power) {
             addToResult("^");
-        }else if(view.getId() == R.id.delete){
-            if (resultTextView.length()<1){
+        } else if (view.getId() == R.id.delete) {
+            if (resultTextView.length() < 1) {
                 Context context = getApplicationContext();
                 CharSequence text = "It's empty";
                 int duration = Toast.LENGTH_SHORT;
@@ -189,16 +206,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 toast.show();
+            } else {
+                input = input.substring(0, resultTextView.length() - 1);
+                resultTextView.setText(input);
             }
-            else {
-                result = result.substring(0,resultTextView.length()-1);
-                resultTextView.setText(result);
-            }
-
-        }else if(view.getId() == R.id.equals){
 
         }
+
     }
-
-
 }
