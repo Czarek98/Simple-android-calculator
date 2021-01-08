@@ -20,10 +20,11 @@
 * Dark mode switch - change everything to black.
 
 ## Screenshots
-Normal Mode
-![Example screenshot](./img/screenshot.png){width=30%}
-Dark Mode
-![Example screenshot2](./img/screenshot2.png){width=30%}
+Normal Mode and Dark Mode
+<div style="display:flex;">
+<img alt="App image" src="/img/screenshot.png" width="30%">
+<img alt="App image" src="/img/screenshot2.png" width="30%">
+</div>
 
 ## Technologies
 * Programming language - Java
