@@ -38,4 +38,4 @@ To-do list:
 * Wow improvement to be done 2
 
 ## Status
-Project is: _in progress
+Project is: _in progress_
