@@ -48,4 +48,4 @@ To-do list:
 Project is: _in progress_
 
 ## Credits
-Library used: https://github.com/APISENSE/rhino-android
+Used: https://github.com/APISENSE/rhino-android
