@@ -13,18 +13,17 @@
 * [Credits](#credits)
 
 ## Functions
-Description of functional buttons:
-C - delete last sign but when result is displaying it works like backspace. It means you can back to previous calculation(before result).
-CE - clear whole calculation.
-() - tapping button display brackets alternately.
-Dark mode switch - change everything to black.
+* Description of functional buttons:
+* C - delete last sign but when result is displaying it works like backspace. It means you can back to previous calculation(before result).
+* CE - clear whole calculation.
+* () - tapping button display brackets alternately.
+* Dark mode switch - change everything to black.
 
 ## Screenshots
 Normal Mode
-![Example screenshot](./img/screenshot.png)
-![Example screenshot2](./img/screenshot2.png)
+![Example screenshot](./img/screenshot.png){width=30%}
 Dark Mode
-
+![Example screenshot2](./img/screenshot2.png){width=30%}
 
 ## Technologies
 * Programming language - Java
