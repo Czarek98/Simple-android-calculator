@@ -23,7 +23,7 @@
 Normal Mode and Dark Mode
 <div style="display:flex;">
 <img alt="App image" src="/img/screenshot.png" width="30%">
-<img alt="App image" src="/img/screenshot2.png" width="30%">
+<img alt="App image" src="/img/screenshot2_1.png" width="30%">
 </div>
 
 ## Technologies
